@@ -1,0 +1,60 @@
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <welcome-file-list>
+    <welcome-file>WEB-INF/pages/index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/WEB-INF/pages/login.jsp</form-login-page>
+      <form-error-page>/WEB-INF/pages/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+
+  <error-page>
+    <location>/WEB-INF/pages/error2.jsp</location>
+  </error-page>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HtmlAuth</web-resource-name>
+      <description>application security constraints</description>
+      <url-pattern>/office</url-pattern>
+      <url-pattern>/market</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>User</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>HtmlAuth</web-resource-name>
+      <description>application security constraints</description>
+      <url-pattern>/management</url-pattern>
+      <url-pattern>/management/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>Admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+
+
+  <security-role>
+    <role-name>Admin</role-name>
+  </security-role>
+  <security-role>
+    <role-name>User</role-name>
+  </security-role>
+  <security-role>
+    <role-name>Anonymous</role-name>
+  </security-role>
+
+</web-app>
