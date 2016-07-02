@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 @WebServlet(value = "/management/categories/add")
-public class Addition extends entity.Addition {
+public class Addition extends entity.Addition {//Добавление категории
 
     @EJB
     CategoryDao categoryDao;
