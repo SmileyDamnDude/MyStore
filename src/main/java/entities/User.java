@@ -24,35 +24,7 @@ public class User
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<Role> roles;
 
-    public static User createUser(HttpServletRequest request){
-        String username = request.getParameter("username");
-        String password1 = request.getParameter("password1");
-        String password2 = request.getParameter("password2");
-        String email = request.getParameter("email");
-        if (!password1.equals(password2)){
-            return null;
-        }
-        if (matches(username, password1)){
-            return new User(username, password1, 1, email);
-        }
-        return null;
-    }
-
-    public static boolean usernameMatches(String lastName){
-        Pattern patternUsername = Pattern.compile("^[A-Za-z0-9_]{1,50}$");
-        Matcher matcherUsername = patternUsername.matcher(lastName);
-        return matcherUsername.matches();
-    }
-
-    public static boolean passwordMatches(String lastName){
-        Pattern patternUsername = Pattern.compile("^[A-Za-z0-9_]{1,40}$");
-        Matcher matcherUsername = patternUsername.matcher(lastName);
-        return matcherUsername.matches();
-    }
-
-    public static boolean matches (String username, String password){
-        return usernameMatches(username) & passwordMatches(password);
-    }
+//saw
 
     public User(){}
 
