@@ -28,7 +28,22 @@ public class Goods
     public Goods(){}
 
     //getgoods
-
+    public static Goods getGoods(HttpServletRequest request){
+        String number = request.getParameter("number");
+        String categoryId = request.getParameter("categoryId");
+        String title = request.getParameter("title");
+        String price = request.getParameter("price");
+        String count = request.getParameter("count");
+        String description = request.getParameter("description");
+        if (titleMatches(title) & descriptionMatches(description)){
+            Goods goods = new Goods(new Integer(categoryId), title, new Double(price), new Integer(count), description);
+            if (number != null){
+                goods.setId(new Integer(number));
+            }
+            return goods;
+        }
+        throw new NumberFormatException();
+    }
 
 
     @ManyToOne(fetch=FetchType.EAGER)
@@ -36,7 +51,25 @@ public class Goods
     private
     Category category;
 
+    public static boolean titleMatches(String title){
+        Pattern patternTitle = Pattern.compile("^[A-Za-zА-Яа-яЁё0-9 -]{1,50}$");
+        Matcher matcherTitle = patternTitle.matcher(title);
+        return matcherTitle.matches();
+    }
 
+    public static boolean descriptionMatches(String description){
+        Pattern patternDescription = Pattern.compile("^[A-Za-zА-Яа-яЁё0-9 -]{0,256}$");
+        Matcher matcherDescription = patternDescription.matcher(description);
+        return matcherDescription.matches();
+    }
+
+    public Goods(int categoryId, String title, double price, int count, String description){
+        this.setCategoryId(categoryId);
+        this.setTitle(title);
+        this.setPrice(price);
+        this.setCount(count);
+        this.setDescription(description);
+    }
 
 
     public int getId() {
